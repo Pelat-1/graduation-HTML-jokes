@@ -1,0 +1,99 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.logo{
+
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    width: 800px;
+    height: 500px;
+}
+body {
+    display: flex;
+ background-image: url("wp4054594-realm-royale-wallpapers.jpg");
+ /* Center the image */
+ background-repeat: no-repeat; /* Do not repeat the image */
+ background-size: cover;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 2%;
+}
+#container {
+    width: 500px;
+    height: 500px;
+    background: #E4FDE1;
+    margin: 10px auto;
+}
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-evenly;
+    font-family: 'Audiowide';
+    color: #E4FDE1;
+}
+ul li {
+    background: #456990;
+    width: 30%;
+    height: 150px;
+    border: 1px solid #028090;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 2rem;
+    padding-top: 3rem;
+}
+.empty {
+background-image: url("0c67bcad22bf111653bb49c9c53edc9c.jpg");
+    border: 2px solid #114B5F;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+h1 {
+    color: #E4FDE1;
+    font-family: 'Sofia';
+    text-align: center;
+    
+}
+/* Modal styles */
+#modal {
+    width: 40%;
+    height: 800px;
+  background-image: url("victory.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Sofia';
+}
+
+#scritta {
+    color:#b660c1;
+    margin: 0;
+    font-size: 4rem;
+    cursor: pointer;
+}
+#scritta:hover{
+    color:#12e5ff;
+}
+
+.hide {
+    display: none;
+}
+#modal #header {
+    text-align: right;
+    padding: 5px 10px;
+}
+/* #modal #header button {
+    padding: 10px;
+    border: 0px;
+    background: #456990;
+    color: #E4FDE1;
+    cursor: pointer;
+} */
