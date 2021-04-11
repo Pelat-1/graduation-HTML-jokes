@@ -9,12 +9,6 @@ let cheated = false;
 $(() => cycle());
 
 function cycle() {
-    if (cheated) {
-        $('#cheat').text('CHEAT INDIVIDUATO!');
-        cheated = false;
-    } else {
-        $('#cheat').text('');
-    }
     $('#level').text('LEVEL ' + level);
     const newTimeout = timeout - (level * 100);
     $('#table').hide();
@@ -45,6 +39,15 @@ function cycle() {
 }
 
 function recycle() {
+    if (level > 20) {
+        // location.replace("https://www.w3schools.com")
+    }
+    if (cheated) {
+        $('#cheat').text('CHEAT INDIVIDUATO!');
+        cheated = false;
+    } else {
+        $('#cheat').text('');
+    }
     checkTrue = 0;
     checkFalse = 0;
     cycle();
