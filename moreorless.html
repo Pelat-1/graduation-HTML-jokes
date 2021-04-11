@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/moreorless.js"></script>
 </head>
 <body>
     <h1>
@@ -19,7 +21,8 @@
         <br>
         P.P.S: se non ti sbrighi ti refresho l'anima!
     </p>
-    <div>
+    <h2 id="level" style="text-align: center"></h2>
+    <div id="table">
         <hr>
         <table style="margin-left: auto; margin-right: auto">
             <tr>
@@ -143,9 +146,9 @@
                 <td><input id="check100" type="checkbox"></td>
             </tr>
         </table>
-        <hr>
-        <input type="button" value="MORE">
-        <input type="button" value="LESS">
     </div>
+    <hr>
+    <input type="button" class="moreorless" value="MORE" disabled>
+    <input type="button" class="moreorless" value="LESS" disabled>
 </body>
 </html>
