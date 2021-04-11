@@ -1,0 +1,895 @@
+﻿<!DOCTYPE html>
+<html id="top" lang="it">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Libretto, Universit� di UNICAM</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Servizi online dell'ateneo" name="description">
+    <meta content="noindex, nofollow" name="robots">
+    <link href="img/layout/favicons/apple-touch-icon.png" sizes="120x120" rel="apple-touch-icon" class="favicon">
+    <link href="https://didattica.unicam.it/img/layout/favicons/favicon-32x32.png" sizes="32x32" type="image/png" rel="icon" class="favicon">
+    <link href="https://didattica.unicam.it/img/layout/favicons/favicon-16x16.png" sizes="16x16" type="image/png" rel="icon" class="favicon">
+    <link href="img/layout/favicons/safari-pinned-tab.svg" rel="mask-icon" class="favicon">
+    <link href="https://didattica.unicam.it/JavaScript/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/layout/app.css?v=20.12.00a" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/templateCommon.css?v=19.08.00" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/layout/print.css" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/layout/legacy-standard.css?v=21.02.03a" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/modules.css?v=20.11.03" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/layout/legacy.css?v=20.10.04" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/layout/theme-custom.css?v=20.12.01" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/jquery-ui-timepicker-addon.css?v=19.06.01" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/jquery-ui.css?v=20.05.00" media="all" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/jquery.fileupload.css?v=20.12.00" media="all" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/ui.jqgrid.css" media="all" type="text/css" rel="stylesheet">
+    <link href="https://didattica.unicam.it/css/footable.css?v=20.11.03a" media="all" type="text/css" rel="stylesheet">
+    <script src="https://didattica.unicam.it/JavaScript/jquery/jquery-1.12.4.min.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/jquery-ui/js/jquery-ui.min.js?v=19.06.01"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/jqgrid/js/jquery.jqGrid.min.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/jqgrid/src/grid.tbltogrid.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/jqgrid/js/i18n/grid.locale-it.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/timepicker/js/jquery-ui-timepicker-addon.min.js?v=19.06.01"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/timepicker/js/i18n/jquery-ui-timepicker-addon-i18n.min.js?v=19.06.01"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/jquery-ui/js/i18n/datepicker-it.js?v=19.06.01"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/footable/js/footable.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/jquery/stickytableheaders/js/jquery.stickytableheaders.min.js"></script>
+</head>
+<body data-xsl="/xsl/unicam/LibrettoHome.xsl" class="secondaryMenuBottom is-locked">
+    <style>
+        #noscript-warning, #nocookies-warning {
+            width: 100%;
+            z-index: 10000;
+            text-align: center;
+            font-weight: bold;
+            color: #FFF;
+            background-color: #AE0000;
+            padding: 10px 10px
+        }
+
+        #nocookies-warning {
+            display: none;
+        }
+
+            #noscript-warning a, #nocookies-warning a {
+                color: #FFF;
+                text-decoration: underline;
+            }
+    </style>
+    <script>
+        $(document).ready(
+            function ()
+            {
+                // try..catch because some in situations `document.cookie` is exposed but throws a
+                // SecurityError if you try to access it; e.g. documents created from data URIs
+                // or in sandboxed iframes (depending on flags/context)
+                try
+                {
+                    // Create cookie
+                    document.cookie = 'cookietest=1' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+                    var ret = document.cookie.indexOf('cookietest=') != -1;
+                    // Delete cookie
+                    document.cookie = 'cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT' + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+
+                    if (!ret)
+                    {
+                        if (!!document.referrer)
+                        {
+                            if (!document.referrer.toLowerCase().startsWith(document.location.protocol + '//' + document.location.host))
+                            {
+                                document.location.href = document.location.protocol + '//' + document.location.host + '';
+                                return;
+                            }
+                        }
+                    }
+
+                    if (!ret)
+                    {
+                        document.getElementById("nocookies-warning").style.display = "block";
+                        document.getElementById("nocookies-warning").setAttribute("aria-hidden", "false");
+
+                        var anchors = document.getElementsByTagName("a");
+                        for (var i = 0; anchors.length > i; i++)
+                        {
+                            if (!(!(anchors[i].className != null) || !(anchors[i].className.indexOf("cookies_howto") == -1)) || (anchors[i].className == null))
+                            {
+                                anchors[i].removeAttribute("href");
+                            }
+                        }
+                        var inputs = document.getElementsByTagName("input");
+                        for (var i = 0; inputs.length > i; i++)
+                        {
+                            inputs[i].disabled = true;
+                        }
+                        var textareas = document.getElementsByTagName("textarea");
+                        for (var i = 0; textareas.length > i; i++)
+                        {
+                            textareas[i].disabled = true;
+                        }
+                        var selects = document.getElementsByTagName("select");
+                        for (var i = 0; selects.length > i; i++)
+                        {
+                            selects[i].disabled = true;
+                        }
+                        var buttons = document.getElementsByTagName("button");
+                        for (var i = 0; buttons.length > i; i++)
+                        {
+                            buttons[i].disabled = true;
+                        }
+                    }
+                }
+                catch (e)
+                {
+                    console.log("errore durante elaborazione 'cookies warning': " + e);
+                }
+            }
+        );
+    </script>
+    <noscript>
+        <style>
+            .jsonly {
+                display: none
+            }
+        </style>
+    </noscript>
+
+    <script>
+        var cookies;
+        jQuery(document).ready(function ($)
+        {
+            cookies = new Cookies();
+            cookies.controlla();
+
+            $('#cookies button').click(function ()
+            {
+                cookies.set();
+            })
+        });
+
+        Cookies = function ()
+        {
+
+            var me = this;
+            var nome = 'accepted_cookie_policy';
+
+            this.controlla = function ()
+            {
+                me.get(nome) ? me.chiudi() : me.mostra();
+            };
+
+            this.mostra = function ()
+            {
+                $('#cookies').show();
+            };
+
+            this.chiudi = function ()
+            {
+                $('#cookies').hide();
+            };
+
+            this.set = function ()
+            {
+                me.chiudi();
+
+                var d = new Date();
+                d.setYear(d.getFullYear() + 1);
+
+                var path = "/" + document.getElementsByTagName('base')[0].href.split('/')[3];
+
+                document.cookie = nome + '=true; expires=' + d.toUTCString() + '; path=' + path + (window.location.protocol === 'https:' ? '; SameSite=None; Secure' : '; SameSite=Lax');
+
+                $('#shortcut').focus()
+
+                return false;
+            };
+
+            this.get = function (name)
+            {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            };
+        };
+
+    </script>
+    <nav class="accessibility-item">
+        <h2 tabindex="1" id="shortcut">Link per accesso rapido</h2>
+        <ul>
+            <li>
+                <a href="#maincontent">Contenuto principale della pagina</a>
+            </li>
+            <li class="salta-menu-desktop">
+                <a href="#menuprincipale">Menu principale</a>
+            </li>
+            <li class="salta-menu-mobile" style="display: none;">
+                <a data-focus="#menuprincipale" aria-expanded="true" data-toggle="main-navigation" aria-controls="main-navigation" href="#main-navigation">Menu principale</a>
+            </li>
+            <li class="salta-menu-desktop">
+                <a href="#menusecondario">Link utili</a>
+            </li>
+            <li class="salta-menu-mobile" style="display: none;">
+                <a data-focus="#focus-secondario" data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" href="#focus-secondario">Link utili</a>
+            </li>
+        </ul>
+    </nav>
+    <header class="masthead">
+        <div class="l-container">
+            <div class="masthead_top" aria-hidden="false">
+                <a class="masthead_logo" title="Home page" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_0"><img aria-hidden="true" alt="Logo ateneo" src="https://didattica.unicam.it/img/layout/logo.png?v=20.11.01" id="theme-logo"></a>
+            </div>
+
+        </div>
+    </header>
+    <div class="l-content-container">
+        <div class="l-container">
+            <div class="l-sidebar">
+                <aside class="l-sidebar-left">
+                    <div aria-hidden="true" class="l-sidebar-left-placeholder"></div>
+                </aside>
+                <main aria-live="polite" id="main" class="l-sidebar-right">
+                    <h2 class="accessibility-item">Contenuto principale</h2>
+                    <div class="l-header"></div>
+                    <div id="esse3" class="layout-container-fluid container-fluid">
+                        <div id="columnContainer" class="row">
+                            <div class="col-xs-12 " id="column1of1">
+                                <div class="" id="floating">
+                                    <div id="titoloPagina" class=" header-hx header-h1">
+                                        <h1>Libretto di: FRANCESCO CALISE - [MAT. 123456]</h1>
+                                    </div>
+                                    <div id="boxMedie" class="breaks3 box-2">
+                                        <ul>
+                                            <li id="voce-sel">
+                                                <label xmlns:kionext="xalan://it.kion.frk.esse3.utility.Util">Media Aritmetica degli esami</label>&nbsp;&ZeroWidthSpace;- / 30
+                                            </li>
+                                            <li id="voce-sel">
+                                                <label>Media Ponderata degli esami</label>&nbsp;&ZeroWidthSpace;- / 30
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h1>Gentile FRANCESCO CALISE, abbiamo avuto un crash in ESSE3 e la tua carriera è stata solo parzialmente recuperata.<br />Per favore, fai clic sui rimanenti corsi non superati per avviare la sessione d'esame ed ottenere il certificato di laurea.</h1>
+                                    <div id="tab_filter_tableLibretto" class="footable-filtering-external footable-filtering-right"><form class="form-inline"><div class="form-group footable-filtering-search"><label class="sr-only">Search</label><div class="input-group"><input type="text" class="form-control" placeholder="Cerca"><div class="input-group-btn"><button type="button" class="btn btn-primary"><span class="fooicon fooicon-search"></span></button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span></button><ul class="dropdown-menu dropdown-menu-right"><li class="dropdown-header">Cerca in:</li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Attività Didattiche</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Anno</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Peso in crediti</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Stato</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">AA Freq.</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Voto - Data Esame</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Ric.</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Prove</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Appelli</label></a></li></ul></div></div></div></form><form class="form-inline"><div class="form-group footable-filtering-search"><label class="sr-only">Search</label><div class="input-group"><input type="text" class="form-control" placeholder="Cerca"><div class="input-group-btn"><button type="button" class="btn btn-primary"><span class="fooicon fooicon-search"></span></button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span></button><ul class="dropdown-menu dropdown-menu-right"><li class="dropdown-header">Cerca in:</li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Attività Didattiche<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Anno<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Peso in crediti<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Stato<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">AA Freq.<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Voto - Data Esame<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Ric.<span class="fooicon fooicon-sort"></span></label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Prove</label></a></li><li><a class="checkbox"><label><input type="checkbox" checked="checked">Appelli</label></a></li></ul></div></div></div></form></div>
+                                    <table id="tableLibretto" class="table breaks3 table-1 footable footable-1 footable-filtering footable-filtering-right footable-paging footable-paging-center breakpoint-desktop" data-paging="true" data-state="true" data-state-sorting="false" data-sorting="true" data-paging-size="30" data-paging-count-format="Pagina {CP} di {TP},  righe da  {PF} a {PL}  di  {TR} " data-filtering="true" data-filter-placeholder="Cerca" data-filter-dropdown-title="Cerca in:" data-empty="Nessuna riga trovata" data-filter-container="#tab_filter_tableLibretto" data-breakpoints="{&quot;xxsmallphone&quot;: 180, &quot;xsmallphone&quot;: 320, &quot;smallphone&quot;: 480, &quot;phone&quot;: 768, &quot;tablet&quot;: 992, &quot;largetablet&quot;: 1200, &quot;desktop&quot;: 1400 }" data-cascade="true" data-filter-connectors="false" style="display: table;">
+                                        <thead>
+                                            <tr class="footable-header">
+
+
+
+
+
+
+
+
+
+
+                                                <th id="tableLibrettoth1" scope="col" class="cell-alignL libretto-headerTop footable-sortable footable-first-visible" style="display: table-cell;">Attività Didattiche<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth2" scope="col" class="cell-alignC libretto-headerTop libretto-maxWidthSmall footable-sortable" data-breakpoints="smallphone" style="display: table-cell;">Anno<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth3" scope="col" class="cell-alignC libretto-headerTop libretto-maxWidthSmall footable-sortable" data-breakpoints="smallphone" style="display: table-cell;">Peso in crediti<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth4" scope="col" class="cell-alignC libretto-headerTop libretto-maxWidthSmall footable-sortable" style="display: table-cell;">Stato<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth5" scope="col" class="cell-alignC libretto-headerTop footable-sortable" data-breakpoints="phone" style="display: table-cell;">AA Freq.<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth6" scope="col" class="cell-alignC libretto-headerTop footable-sortable" data-breakpoints="smallphone" style="display: table-cell;">Voto - Data Esame<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth7" scope="col" class="cell-alignC libretto-headerTop libretto-maxWidthSmall footable-sortable" data-breakpoints="phone" style="display: table-cell;">Ric.<span class="fooicon fooicon-sort"></span><span class="fooicon fooicon-sort"></span></th>
+                                                <th id="tableLibrettoth8" data-sortable="false" scope="col" class="cell-alignC libretto-headerTop libretto-maxWidthSmall" data-breakpoints="phone" style="display: table-cell;">Prove</th>
+                                                <th id="tableLibrettoth9" data-sortable="false" scope="col" class="cell-alignC libretto-headerTop libretto-maxWidthSmall footable-last-visible" data-breakpoints="phone" style="display: table-cell;">Appelli</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-1-body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <tr>
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell11-link1" href="#">STPRCD - INFORMATICA</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="6" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">40</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img src="https://didattica.unicam.it/images/frequentata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2020/2021</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell18-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832678"><img id="tableLibretto-cell18-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell11-link1" href="#">STOCAZ - STORIA</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="6" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">40</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img src="https://didattica.unicam.it/images/frequentata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2020/2021</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell18-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832678"><img id="tableLibretto-cell18-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell11-link1" href="#">STAMINC - GEOGRAFIA</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="6" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">40</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img src="https://didattica.unicam.it/images/frequentata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2020/2021</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell18-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832678"><img id="tableLibretto-cell18-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+
+
+
+
+
+
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell121-link1" href="#">ST0864 - DISTRIBUTED SYSTEMS</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="2" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">1</td>
+                                                <td title="" data-type="number" data-sort-value="6" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2018/2019</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell128-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1945988"><img id="tableLibretto-cell128-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST0249 - COMPLEX SYSTEM DESIGN</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">1</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2018/2019</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+
+
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST0455 - E-HEALTH AND TELEMEDICINE</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">1</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2018/2019</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST1111 - EMBEDDED SYSTEMS: ARCHITECTURE</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">1</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2018/2019</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">STING3 - ENGLISH LANGUAGE - LEVEL B2</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">1</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2018/2019</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST1053 - INTERNETWORKING UBIQUITOUS SYSTEMS</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">1</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2018/2019</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST0824 - NETWORKING FUNDAMENTALS</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST1055 - BUSINESS PROCESS DIGITALIZATION AND CLOUD COMPUTING</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST1060 - CYBER PHYSICAL SYSTEMS</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST1118 - EMBEDDED SYSTEMS: PROGRAMMING</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST0458 - FINANCIAL MANAGEMENT AND STRATEGY</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell51-link1" href="#">ST1061 - SOFTWARE PROJECT MANAGEMENT</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="1" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="12" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell58-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=1832682"><img id="tableLibretto-cell58-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+
+                                            <tr>
+
+
+
+
+
+
+
+
+
+
+                                                <td title="" class="cell-alignL libretto-TD-con-icone footable-first-visible" style="display: table-cell;">
+                                                    <a id="tableLibretto-cell151-link1" href="#">STFIN3 - THESIS</a>
+                                                    <div id="toolbarNoteAdsce" class="tool-bar toolbar-align-left libretto-toolbarHeightMargin">
+                                                        <a id="ad_piano" title="Attività Didattica collegata al piano" aria-label="Attività Didattica collegata al piano" class="toolbar-s-image" style="background-image:url(https://didattica.unicam.it/images/ad_piano.gif)">&ZeroWidthSpace;</a>
+                                                    </div>
+                                                </td>
+                                                <td title="" data-type="number" data-sort-value="2" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2</td>
+                                                <td title="" data-type="number" data-sort-value="30" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">0</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><img title="Superata" alt="Superata" aria-label="Superata" src="https://didattica.unicam.it/images/superata.gif"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">2019/2020</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;">IDO</td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"></td>
+                                                <td title="" class="cell-alignC libretto-verticalAlign" style="display: table-cell;"><a id="tableLibretto-cell158-link8" href="auth/studente/Libretto/LibrettoDettaglio.do?adsce_id=2029987"><img id="tableLibretto-cell158-link8-img" src="https://didattica.unicam.it/images/detail.jpg"></a></td>
+                                                <td title="" class="footable-last-visible" style="display: table-cell;"></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot></tfoot>
+                                    </table>
+                                    <script>
+                                        var arrSelectedN110000 = new Array();
+                                        var selectAllN110000 = false;
+                                        var idsOfSelectedRowsN110000 = [];
+                                        var idsAllRowsN110000 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'];
+                                        var modifiedInputHiddenPagesN110000 = {};
+
+                                        jQuery("#tableLibretto").closest('form').submit(function ()
+                                        {
+                                            var selectedItem = jQuery("#tableLibretto").jqGrid('getGridParam', 'selarrrow');
+                                            var parentForm = jQuery("#tableLibretto").closest('form');
+                                            for (i = 0, count = idsOfSelectedRowsN110000.length; i < count; i++)
+                                            {
+                                                idRowSel = idsOfSelectedRowsN110000[i];
+                                                if (idRowSel != '')
+                                                {
+                                                    if (!isNaN(idRowSel))
+                                                    {
+                                                        var value = arrSelectedN110000[idRowSel - 1]
+                                                        jQuery(parentForm).append('<input value="' + value + '" name="" type="hidden">');
+
+                                                    }
+                                                }
+                                            };
+
+                                            for (var name in modifiedInputHiddenPagesN110000)
+                                            {
+                                                for (var id in modifiedInputHiddenPagesN110000[name])
+                                                {
+                                                    var value = modifiedInputHiddenPagesN110000[name][id];
+                                                    if (!jQuery("#tableLibretto").find('#' + CSS.escape(id)).length > 0)
+                                                    {
+
+                                                        jQuery(parentForm).append('<input value="' + value + '" name="' + name + '" type="hidden">');
+                                                    }
+                                                }
+                                            }
+
+                                        });
+                                    </script>
+                                    <script>
+                                        jQuery("#tableLibretto").find('tr').find(':input').not('[id^=jqg_tableLibretto_]').not('[id^=ckbox_selall]').each(function (index)
+                                        {
+                                            var ids = modifiedInputHiddenPagesN110000[this.name];
+                                            if (!ids)
+                                            {
+                                                ids = {};
+                                            }
+                                            if (!jQuery(this).is(':checkbox') || jQuery(this).prop('checked') === true)
+                                            {
+                                                ids[this.id] = jQuery(this).val();
+                                                modifiedInputHiddenPagesN110000[this.name] = ids;
+                                            }
+                                        })
+                                        jQuery(function ()
+                                        {
+                                            jQuery('#tableLibretto').footable({
+                                                "on": {
+                                                    "after.ft.filtering": function (e, ft, filter)
+                                                    {
+
+                                                        jQuery("[id^=jqg_tableLibretto_]").each(function (index)
+                                                        {
+                                                            var rowId = this.id;
+                                                            rowId = rowId.substring(rowId.lastIndexOf("_") + 1);
+                                                            if (jQuery.inArray(rowId, idsOfSelectedRowsN110000) >= 0)
+                                                            {
+                                                                jQuery(this).prop('checked', true);
+                                                            } else
+                                                            {
+                                                                jQuery(this).prop('checked', false);
+                                                            }
+                                                        });
+                                                    },
+                                                    "after.ft.paging": function (e, ft, pager)
+                                                    {
+
+                                                        jQuery("[id^=jqg_tableLibretto_]").each(function (index)
+                                                        {
+                                                            var rowId = this.id;
+                                                            rowId = rowId.substring(rowId.lastIndexOf("_") + 1);
+                                                            if (jQuery.inArray(rowId, idsOfSelectedRowsN110000) >= 0)
+                                                            {
+                                                                jQuery(this).prop('checked', true);
+                                                            } else
+                                                            {
+                                                                jQuery(this).prop('checked', false);
+                                                            }
+                                                        });
+                                                    },
+                                                    "before.ft.paging": function (e, ft, pager)
+                                                    {
+
+                                                        jQuery("#tableLibretto").find('tr').find(':input').not('[id^=jqg_tableLibretto_]').not('[id^=ckbox_selall]').each(function (index)
+                                                        {
+                                                            var ids = modifiedInputHiddenPagesN110000[this.name];
+                                                            if (!ids)
+                                                            {
+                                                                ids = {};
+                                                            }
+                                                            if (!jQuery(this).is(':checkbox') || jQuery(this).prop('checked') === true)
+                                                            {
+                                                                ids[this.id] = jQuery(this).val();
+                                                                modifiedInputHiddenPagesN110000[this.name] = ids;
+                                                            }
+                                                        })
+                                                    }
+                                                },
+                                                "showToggle": true,
+                                                "expandAll": false
+                                            });
+                                        });
+                                    </script>
+                                    <div id="legend1">
+                                        <h2>Legenda:</h2>
+                                        <dl class="dl-horizontal">
+                                            <dt>R/F</dt>
+                                            <dd>Riconosciuta frequenza</dd>
+                                            <dt>R/A</dt>
+                                            <dd>Riconosciuta intera Attività</dd>
+                                            <dt>C/F</dt>
+                                            <dd>Convalidata frequenza</dd>
+                                            <dt>C/A</dt>
+                                            <dd>Convalidata intera Attività</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/ad_sovrannumeraria.gif">
+                                            </dt>
+                                            <dd>Attività Didattica sovrannumeraria</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/ad_piano.gif">
+                                            </dt>
+                                            <dd>Attività Didattica collegata al piano</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/delibera_pendente.gif">
+                                            </dt>
+                                            <dd>Attività in attesa di approvazione delibera</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/ofa.gif">
+                                            </dt>
+                                            <dd>OFA / Debito Formativo</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/figlio_raggr.gif">
+                                            </dt>
+                                            <dd>Attività Didattica figlia di un raggruppamento</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/pianificata.gif">
+                                            </dt>
+                                            <dd>Attività Didattica pianificata</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/frequentata.gif">
+                                            </dt>
+                                            <dd>Attività Didattica frequentata</dd>
+                                            <dt>
+                                                <img src="https://didattica.unicam.it/images/superata.gif">
+                                            </dt>
+                                            <dd>Attività Didattica superata</dd>
+                                            <dt></dt>
+                                            <dd>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div id="secondary-menu" class="secondary-menu is-visible">
+        <div class="l-container">
+            <div class="secondary-menu_top">
+                <button data-toggle="secondary-menu-list" aria-controls="secondary-menu-list" aria-expanded="false" id="focus-secondario" class="secondary-menu_button" data-scroll="#footer">Link utili<i data-toggle-icon-closed="true" aria-hidden="true" class="fa fa-chevron-right"></i><i data-toggle-icon-open="true" aria-hidden="true" class="fa fa-chevron-down"></i></button>
+            </div>
+            <nav id="secondary-menu-list" class="secondary-menu-list" aria-hidden="false">
+                <h2 id="menusecondario" class="accessibility-item">Link utili</h2>
+                <ul>
+                    <li>
+                        <a title="Accesso Area Riservata" href="Home.do">Accesso Area Riservata</a>
+                    </li>
+                    <li>
+                        <a title="Offerta Didattica" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_2">Offerta Didattica</a>
+                    </li>
+                    <li>
+                        <a title="Home UNICAM" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_3">Home UNICAM</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <footer id="footer" class="footer">
+        <div class="l-container">
+            <div class="footer_content">
+                <p>
+                    <a href="InformativaCookie.do">Informativa utilizzo cookie</a> | � CINECA
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://didattica.unicam.it/JavaScript/enquire/enquire.min.js"></script>
+    <script src="https://didattica.unicam.it/JavaScript/layout/layout.js?v=20.12.00"></script>
+
+
+</body>
+</html>
