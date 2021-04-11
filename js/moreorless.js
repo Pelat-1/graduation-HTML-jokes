@@ -3,7 +3,6 @@ let chances = 50;
 let checkTrue = 0;
 let checkFalse = 0;
 const timeout = 2500;
-// let lastFiveAnswers = [];
 
 $(() => cycle());
 
@@ -41,4 +40,20 @@ function recycle() {
     checkTrue = 0;
     checkFalse = 0;
     cycle();
+}
+
+function betMore() {
+    $('.moreorless').prop('disabled', true);
+    if (checkTrue > checkFalse) {
+        level++;
+        chances++;
+    }
+}
+
+function betLess() {
+    $('.moreorless').prop('disabled', true);
+    if (checkFalse > checkTrue) {
+        level++;
+        chances--;
+    }
 }
