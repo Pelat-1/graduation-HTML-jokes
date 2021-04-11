@@ -243,7 +243,7 @@
         if(globalCounter == 42)
         {
           clearInterval(interval);
-          interval = setInterval("changeWord()", 800);
+          interval = setInterval("changeWord()", 700);
           time.style.color = "orange";
         }
         if(globalCounter == 52)
@@ -265,7 +265,7 @@
         if(globalCounter == 62 && won == false)
         {
           clearInterval(interval);
-          interval = setInterval("changeWord()", 650);
+          interval = setInterval("changeWord()", 500);
           var gmContainer = document.getElementById('gameContainer');
           gmContainer.style.display = "none";
           var loseContainer = document.getElementById('loseContainer');
