@@ -194,22 +194,22 @@
     var interval;
     var words = ["CULO","STRONZO","CANE","MOSTARDA","MERDA","GAETANO","ANO","BUKKIN"]
     var timer = 0
+    var won = false;
 
     function getRandom(num){
-        return Math.floor(Math.random()*num);
-
+      return Math.floor(Math.random()*num);
     }
 
     function changeWord(){
-        count ++;
-        var randNum = getRandom(words.length);
-        document.getElementById("Word").value = words[randNum];
-        var num1 = getRandom(255);
-        var num2 = getRandom(255);
-        var num3 = getRandom(255);
-        var col = "rgb("+num1+","+num2+","+num3+","+0.3+")";
-        var div = document.getElementById( 'gameContainer' );
-        div.style.background = col;
+      count ++;
+      var randNum = getRandom(words.length);
+      document.getElementById("Word").value = words[randNum];
+      var num1 = getRandom(255);
+      var num2 = getRandom(255);
+      var num3 = getRandom(255);
+      var col = "rgb("+num1+","+num2+","+num3+","+0.3+")";
+      var div = document.getElementById( 'gameContainer' );
+      div.style.background = col;
     }
 
     function checkTimePassed()
@@ -221,47 +221,47 @@
         
         if(globalCounter == 12)
         {
-            clearInterval(interval);
-            interval = setInterval("changeWord()", 1500);
-            time.style.color = "#FFFFE0";
+          clearInterval(interval);
+          interval = setInterval("changeWord()", 1500);
+          time.style.color = "#FFFFE0";
 
         }
         if(globalCounter == 32)
         {
-            clearInterval(interval);
-            interval = setInterval("changeWord()", 1000);
+          clearInterval(interval);
+          interval = setInterval("changeWord()", 1000);
 
-            var buttonsLyt1 = document.getElementById('buttonsLayout1');
-            buttonsLyt1.style.display = "none";
+          var buttonsLyt1 = document.getElementById('buttonsLayout1');
+          buttonsLyt1.style.display = "none";
 
-            var buttonsLyt2 = document.getElementById('buttonsLayout2');
-            buttonsLyt2.style.display = "flex";
-            time.style.color = "yellow";
+          var buttonsLyt2 = document.getElementById('buttonsLayout2');
+          buttonsLyt2.style.display = "flex";
+          time.style.color = "yellow";
 
         }
         if(globalCounter == 42)
         {
-            clearInterval(interval);
-            interval = setInterval("changeWord()", 500);
-            time.style.color = "orange";
+          clearInterval(interval);
+          interval = setInterval("changeWord()", 500);
+          time.style.color = "orange";
         }
         if(globalCounter == 52)
         {
-            var gameContainer = document.getElementById('gameContainer');
-            gameContainer.style.cursor = "none";
+          var gameContainer = document.getElementById('gameContainer');
+          gameContainer.style.cursor = "none";
 
-            var buttone1 = document.getElementById('buttone1');
-            buttone1.style.cursor = "none";
-            var buttone2 = document.getElementById('buttone2');
-            buttone2.style.cursor = "none";
-            var buttone3 = document.getElementById('buttone3');
-            buttone3.style.cursor = "none";
-            var buttone4 = document.getElementById('buttone4');
-            buttone4.style.cursor = "none";
-            time.style.color = "red";
+          var buttone1 = document.getElementById('buttone1');
+          buttone1.style.cursor = "none";
+          var buttone2 = document.getElementById('buttone2');
+          buttone2.style.cursor = "none";
+          var buttone3 = document.getElementById('buttone3');
+          buttone3.style.cursor = "none";
+          var buttone4 = document.getElementById('buttone4');
+          buttone4.style.cursor = "none";
+          time.style.color = "red";
         }
 
-        if(globalCounter == 62)
+        if(globalCounter == 62 && won == false)
         {
           var gmContainer = document.getElementById('gameContainer');
           gmContainer.style.display = "none";
@@ -276,35 +276,32 @@
         var points = +document.getElementById('Point').value;
         if(buttonName === activeWord)
         {
-            multiplier++;
-            var add = getRandom(255);
-            points = points + add  * multiplier;
-            document.getElementById('Multiplier').value = "+" + add + " x" + multiplier + " combo";
+          multiplier++;
+          var add = getRandom(255);
+          points = points + add  * multiplier;
+          document.getElementById('Multiplier').value = "+" + add + " x" + multiplier + " combo";
             
         }else{
             
-            var less = getRandom(255);
-            points = points - less * multiplier;
-            document.getElementById('Multiplier').value = "-" + less + " x" + multiplier + " combo";
-            multiplier = 1;
+          var less = getRandom(255);
+          points = points - less * multiplier;
+          document.getElementById('Multiplier').value = "-" + less + " x" + multiplier + " combo";
+          multiplier = 1;
             
         }
 
         document.getElementById('Point').value = "" + points;
         if(points >= 100000)
         {
-            var gameContainer = document.getElementById('gameContainer');
-            gameContainer.style.display = "none";
-            var wonCOntainer = document.getElementById('wonContainer');
-            wonCOntainer.style.display = "flex";
+          clearInterval(interval);
+          clearInterval(globalCounter);
+          var gameContainer = document.getElementById('gameContainer');
+          gameContainer.style.display = "none";
+          var wonCOntainer = document.getElementById('wonContainer');
+          wonCOntainer.style.display = "flex";
+          won = true;
         }
 
-    }
-
-
-    function stop() {
-        clearInterval(interval);
-        alert('The background color has changed ' + count + ' times before you clicked me!');
     }
 
     interval = setInterval("changeWord()", 2000);
