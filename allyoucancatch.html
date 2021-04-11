@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <style>
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      .page-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        background: rgb(46,46,46);
+        background: linear-gradient(346deg, rgba(46,46,46,1) 15%, rgba(57,165,173,1) 40%, rgba(6,6,6,1) 100%);
+      }
+      .game-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 70%;
+        height: 65% !important;
+        background: rgb(46,46,46);
+        background: linear-gradient(346deg, rgba(46,46,46,1) 15%, rgba(57,165,173,1) 40%, rgba(6,6,6,1) 100%);
+        height: 50%;
+        border-radius: 20px;
+        -webkit-box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+        -moz-box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+        box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+      }
+      .won-container{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 70%;
+        height: 65% !important;
+        background: rgb(46,46,46);
+        background: linear-gradient(346deg, rgba(46,46,46,1) 15%, rgba(57,165,173,1) 40%, rgba(6,6,6,1) 100%);
+        height: 50%;
+        border-radius: 20px;
+        -webkit-box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+        -moz-box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+        box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+      }
+      .lose-container{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 70%;
+        height: 65% !important;
+        background:black;
+        height: 50%;
+        border-radius: 20px;
+        -webkit-box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+        -moz-box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+        box-shadow: 2px 3px 20px 14px rgba(255,255,255,1);
+      }
+      .buttons-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      input{
+        color: black;
+        padding: 10px;
+        width: 150px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 10px;
+        font-size: 20px;
+      }
+      .button-box-left{
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+      }
+      .button-box{
+        width: 50%;
+      }
+      .title-text{
+        font-size: 32px;
+        color: white;
+        font-weight: 600;
+      }
+      .word{
+        background-color: black;
+        color: white;
+        font-size: 30px;
+        padding: 5px;
+        width: 50%;
+        text-align: center;
+        margin: 20px;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: crosshair
+      }
+      .subtitle-text{
+        font-size: 18px;
+        color: white;
+      }
+      .footer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .points{
+        font-size: 34px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        text-align: center;
+        width: 300px;
+        font-weight: 600;
+      }
+      .timer{
+        font-size: 45px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        text-align: center;
+        width: 300px;
+        font-weight: 600;
+      }
+      .multiplier{
+        font-size: 30px;
+        color: yellow;
+        background-color: transparent;
+        border: none;
+        text-align: center;
+        width: 300px;
+      }
+      .won{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        z-index: 500;
+        background-color: white;
+      }
+      .won-content
+      {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border-radius: 20px;
+        font-size: 40px;
+        text-align: center;
+      }
+      .lose-content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+        font-size: 40px;
+        text-align: center;
+      }
+      #buttonsLayout2
+      {
+        display: none;
+      }
+      .rigioca
+      {
+        background-color: white;
+        color: black;
+        padding: 10px;
+        font-size: 25px;
+        border-radius: 10px;
+        cursor: cell;
+        margin-bottom: 150px;
+      }
+        
+  </style>
+  <script type="text/javascript">
+    var globalCounter = 0; 
+    var multiplier = 1;
+    var count = 0;
+    var interval;
+    var words = ["CULO","STRONZO","CANE","MOSTARDA","MERDA","GAETANO","ANO","BUKKIN"]
+    var timer = 0
+
+    function getRandom(num){
+        return Math.floor(Math.random()*num);
+
+    }
+
+    function changeWord(){
+        count ++;
+        var randNum = getRandom(words.length);
+        document.getElementById("Word").value = words[randNum];
+        var num1 = getRandom(255);
+        var num2 = getRandom(255);
+        var num3 = getRandom(255);
+        var col = "rgb("+num1+","+num2+","+num3+","+0.3+")";
+        var div = document.getElementById( 'gameContainer' );
+        div.style.background = col;
+    }
+
+    function checkTimePassed()
+    {
+        globalCounter++;
+
+        var time = document.getElementById('Timer');
+        document.getElementById('Timer').value = +time.value - 1;
+        
+        if(globalCounter == 12)
+        {
+            clearInterval(interval);
+            interval = setInterval("changeWord()", 1500);
+            time.style.color = "#FFFFE0";
+
+        }
+        if(globalCounter == 32)
+        {
+            clearInterval(interval);
+            interval = setInterval("changeWord()", 1000);
+
+            var buttonsLyt1 = document.getElementById('buttonsLayout1');
+            buttonsLyt1.style.display = "none";
+
+            var buttonsLyt2 = document.getElementById('buttonsLayout2');
+            buttonsLyt2.style.display = "flex";
+            time.style.color = "yellow";
+
+        }
+        if(globalCounter == 42)
+        {
+            clearInterval(interval);
+            interval = setInterval("changeWord()", 500);
+            time.style.color = "orange";
+        }
+        if(globalCounter == 52)
+        {
+            var gameContainer = document.getElementById('gameContainer');
+            gameContainer.style.cursor = "none";
+
+            var buttone1 = document.getElementById('buttone1');
+            buttone1.style.cursor = "none";
+            var buttone2 = document.getElementById('buttone2');
+            buttone2.style.cursor = "none";
+            var buttone3 = document.getElementById('buttone3');
+            buttone3.style.cursor = "none";
+            var buttone4 = document.getElementById('buttone4');
+            buttone4.style.cursor = "none";
+            time.style.color = "red";
+        }
+
+        if(globalCounter == 62)
+        {
+          var gmContainer = document.getElementById('gameContainer');
+          gmContainer.style.display = "none";
+          var loseContainer = document.getElementById('loseContainer');
+          loseContainer.style.display = "flex";
+        }
+    }
+
+    function getPoint(buttonName)
+    {
+        var activeWord = document.getElementById('Word').value;
+        var points = +document.getElementById('Point').value;
+        if(buttonName === activeWord)
+        {
+            multiplier++;
+            var add = getRandom(255);
+            points = points + add  * multiplier;
+            document.getElementById('Multiplier').value = "+" + add + " x" + multiplier + " combo";
+            
+        }else{
+            
+            var less = getRandom(255);
+            points = points - less * multiplier;
+            document.getElementById('Multiplier').value = "-" + less + " x" + multiplier + " combo";
+            multiplier = 1;
+            
+        }
+
+        document.getElementById('Point').value = "" + points;
+        if(points >= 100000)
+        {
+            var gameContainer = document.getElementById('gameContainer');
+            gameContainer.style.display = "none";
+            var wonCOntainer = document.getElementById('wonContainer');
+            wonCOntainer.style.display = "flex";
+        }
+
+    }
+
+
+    function stop() {
+        clearInterval(interval);
+        alert('The background color has changed ' + count + ' times before you clicked me!');
+    }
+
+    interval = setInterval("changeWord()", 2000);
+    globalCounter = setInterval("checkTimePassed()", 1000);
+
+  </script>
+  <title>AllYouCanCheckGame</title>
+</head>
+<body>
+    <div class = "page-container">
+        <div id="gameContainer" class = "game-container">
+            <div class = "title-text">ALL YOU CAN CATCH!</div>
+            <div class = "subtitle-text">Press the button corresponding to the word you see. 100'000 POINTS TO WIN!</div>
+            <input class = "word" id="Word" value="ANO" disabled>
+            <div id="buttonsLayout1" class = "buttons-container">
+                <div class ="button-box-left">
+                    <div style="width: 160px;">
+                        <input type="button" value="CULO" onClick="getPoint('CULO')">
+                        <input type="button" value="STRONZO" onClick="getPoint('STRONZO')">
+                        <input type="button" value="CANE" onClick="getPoint('CANE')">
+                        <input type="button" value="MOSTARDA" onClick="getPoint('MOSTARDA')">
+                    </div>
+                </div>
+                <div class ="button-box">
+                    <div style="width: 160px;">
+                        <input type="button" value="MERDA" onClick="getPoint('MERDA')">
+                        <input type="button" value="GAETANO" onClick="getPoint('GAETANO')">
+                        <input type="button" value="ANO" onClick="getPoint('ANO')">
+                        <input type="button" value="BUKKIN" onClick="getPoint('BUKKIN')">
+                    </div>
+                </div>
+            </div>
+            <div id="buttonsLayout2" class = "buttons-container">
+                <div class ="button-box-left">
+                    <div style="width: 160px;">
+                        <input id="buttone1" type="button" value="ANO" onClick="getPoint('ANO')">
+                        <input type="button" value="BUKKIN" onClick="getPoint('BUKKIN')">
+                        <input id="buttone2" type="button" value="CULO" onClick="getPoint('CULO')">
+                        <input type="button" value="STRONZO" onClick="getPoint('STRONZO')">
+                    </div>
+                </div>
+                <div class ="button-box">
+                    <div style="width: 160px;">
+                        <input id="buttone3" type="button" value="MERDA" onClick="getPoint('MERDA')">
+                        <input type="button" value="GAETANO" onClick="getPoint('GAETANO')">
+                        <input id="buttone4" type="button" value="CANE" onClick="getPoint('CANE')">
+                        <input type="button" value="MOSTARDA" onClick="getPoint('MOSTARDA')">
+                    </div>
+                </div>
+            </div>
+            <div class = "footer">
+                <input class = "points" id="Point" value="0" disabled>
+                <input class = "timer" id="Timer" value="60" disabled>
+                <span><input class = "multiplier" id="Multiplier" value="x1 Combo" disabled> </span>
+            </div>
+        </div>
+        <div id="wonContainer" class = "won-container">
+            <div class = "won-content">Complimenti hai vinto!<br>E mo? 👋🖖👍</div>
+        </div>
+        <div id="loseContainer" class = "lose-container">
+          <div class = "lose-content">Ma fai proprio schifo! 💩💩💩</div>
+          <button class ="rigioca" onClick="window.location.reload();">Rigioca!</button>
+      </div>
+    </div>
+   
+</body>
+</html>
