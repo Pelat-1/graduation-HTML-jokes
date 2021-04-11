@@ -3,14 +3,14 @@ let chances = 50;
 let checkTrue = 0;
 let checkFalse = 0;
 const timeout = 2500;
-let lastFiveAnswers = [];
+let lastFiveClicks = [];
 let cheated = false;
 
 $(() => cycle());
 
 function cycle() {
     $('#level').text('LEVEL ' + level);
-    const newTimeout = timeout - (level * 100);
+    const newTimeout = getTimeout();
     $('#table').hide();
     while (checkTrue === checkFalse) {
         for (let i = 1; i < 101; i++) {
@@ -38,6 +38,12 @@ function cycle() {
     newTimeout);
 }
 
+function getTimeout() {
+    let newTimeout = level * -100;
+    newTimeout += timeout;
+    return newTimeout < 500 ? 500 : newTimeout;
+}
+
 function recycle() {
     if (level > 20) {
         // location.replace("https://www.w3schools.com")
@@ -55,40 +61,45 @@ function recycle() {
 
 function betMore() {
     $('.moreorless').prop('disabled', true);
-    noCheatVerifier(true);
-    if (checkTrue > checkFalse && !cheated) {
+    pushClick(true);
+    if (checkTrue > checkFalse) {
         level++;
         chances++;
+        noCheatVerifier();
     }
 }
 
 function betLess() {
     $('.moreorless').prop('disabled', true);
-    noCheatVerifier(false);
-    if (checkFalse > checkTrue & !cheated) {
+    pushClick(false);
+    if (checkFalse > checkTrue) {
         level++;
         chances--;
+        noCheatVerifier();
     }
 }
 
-function noCheatVerifier(isMore) {
-    lastFiveAnswers.push(isMore);
-    if (lastFiveAnswers.length > 4) {
-        if (lastFiveAnswers.length > 5) {
-            lastFiveAnswers = lastFiveAnswers.reverse();
-            lastFiveAnswers.pop();
-            lastFiveAnswers = lastFiveAnswers.reverse();
-        }
+function pushClick(isMore) {
+    lastFiveClicks.push(isMore);
+    if (lastFiveClicks.length > 5) {
+        lastFiveClicks = lastFiveClicks.reverse();
+        lastFiveClicks.pop();
+        lastFiveClicks = lastFiveClicks.reverse();
+    }
+}
+
+function noCheatVerifier() {
+    if (lastFiveClicks.length > 4) {
         let alternativeClick = true;
-        for (let i = 1; i < lastFiveAnswers.length; i++) {
-            if (lastFiveAnswers[i - 1] === lastFiveAnswers[i]) {
+        for (let i = 1; i < lastFiveClicks.length; i++) {
+            if (lastFiveClicks[i - 1] === lastFiveClicks[i]) {
                 alternativeClick = false;
                 break;
             }
         }
         let alwaysSameAnswer = true;
-        for (let i = 1; i < lastFiveAnswers.length; i++) {
-            if (lastFiveAnswers[i - 1] !== lastFiveAnswers[i]) {
+        for (let i = 1; i < lastFiveClicks.length; i++) {
+            if (lastFiveClicks[i - 1] !== lastFiveClicks[i]) {
                 alwaysSameAnswer = false;
                 break;
             }
@@ -96,9 +107,9 @@ function noCheatVerifier(isMore) {
         if (alternativeClick || alwaysSameAnswer) {
             level -= 11;
             chances = 50;
+            lastFiveClicks = [];
             if (level < 2) {
                 level = 1;
-                lastFiveAnswers = [];
             }
             cheated = true;
         }
