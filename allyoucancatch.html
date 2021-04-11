@@ -195,6 +195,7 @@
     var words = ["CULO","STRONZO","CANE","MOSTARDA","MERDA","GAETANO","ANO","BUKKIN"]
     var timer = 0
     var won = false;
+    var cinquantamila = false;
 
     function getRandom(num){
       return Math.floor(Math.random()*num);
@@ -242,7 +243,7 @@
         if(globalCounter == 42)
         {
           clearInterval(interval);
-          interval = setInterval("changeWord()", 500);
+          interval = setInterval("changeWord()", 700);
           time.style.color = "orange";
         }
         if(globalCounter == 52)
@@ -263,6 +264,8 @@
 
         if(globalCounter == 62 && won == false)
         {
+          clearInterval(interval);
+          interval = setInterval("changeWord()", 500);
           var gmContainer = document.getElementById('gameContainer');
           gmContainer.style.display = "none";
           var loseContainer = document.getElementById('loseContainer');
@@ -283,7 +286,10 @@
           if(multiplier == 10){ alert("🖕🖕🖕 NON COSI' IN FRETTA 🖕🖕🖕"); }
           if(multiplier == 20){ alert("CHIUDIMI CORRI!!! 🥱🥱"); }
           if(multiplier == 21){ alert("DEVI PREMERE FORTE! 😈😈"); }
-          if(points == 50000){ alert("🤑🤑 WOW 50'000 PUNTI! ORA CHIUDIMI 🤑🤑"); }
+          if(points >= "50000" && cinquantamila == false){ 
+            alert("🤑🤑 WOW 50'000 PUNTI! ORA CHIUDIMI 🤑🤑"); 
+            cinquantamila = true;
+          }
             
         }else{
             
