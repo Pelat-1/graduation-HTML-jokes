@@ -3,10 +3,18 @@ let chances = 50;
 let checkTrue = 0;
 let checkFalse = 0;
 const timeout = 2500;
+let lastFiveAnswers = [];
+let cheated = false;
 
 $(() => cycle());
 
 function cycle() {
+    if (cheated) {
+        $('#cheat').text('CHEAT INDIVIDUATO!');
+        cheated = false;
+    } else {
+        $('#cheat').text('');
+    }
     $('#level').text('LEVEL ' + level);
     const newTimeout = timeout - (level * 100);
     $('#table').hide();
@@ -44,7 +52,8 @@ function recycle() {
 
 function betMore() {
     $('.moreorless').prop('disabled', true);
-    if (checkTrue > checkFalse) {
+    noCheatVerifier(true);
+    if (checkTrue > checkFalse && !cheated) {
         level++;
         chances++;
     }
@@ -52,8 +61,43 @@ function betMore() {
 
 function betLess() {
     $('.moreorless').prop('disabled', true);
-    if (checkFalse > checkTrue) {
+    noCheatVerifier(false);
+    if (checkFalse > checkTrue & !cheated) {
         level++;
         chances--;
+    }
+}
+
+function noCheatVerifier(isMore) {
+    lastFiveAnswers.push(isMore);
+    if (lastFiveAnswers.length > 4) {
+        if (lastFiveAnswers.length > 5) {
+            lastFiveAnswers = lastFiveAnswers.reverse();
+            lastFiveAnswers.pop();
+            lastFiveAnswers = lastFiveAnswers.reverse();
+        }
+        let alternativeClick = true;
+        for (let i = 1; i < lastFiveAnswers.length; i++) {
+            if (lastFiveAnswers[i - 1] === lastFiveAnswers[i]) {
+                alternativeClick = false;
+                break;
+            }
+        }
+        let alwaysSameAnswer = true;
+        for (let i = 1; i < lastFiveAnswers.length; i++) {
+            if (lastFiveAnswers[i - 1] !== lastFiveAnswers[i]) {
+                alwaysSameAnswer = false;
+                break;
+            }
+        }
+        if (alternativeClick || alwaysSameAnswer) {
+            level -= 11;
+            chances = 50;
+            if (level < 2) {
+                level = 1;
+                lastFiveAnswers = [];
+            }
+            cheated = true;
+        }
     }
 }
