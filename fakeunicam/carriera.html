@@ -1070,13 +1070,13 @@
                 <h2 id="menusecondario" class="accessibility-item">Link utili</h2>
                 <ul>
                     <li>
-                        <a title="Accesso Area Riservata" href="Home.do">Accesso Area Riservata</a>
+                        <a title="Accesso Area Riservata" href="#">Accesso Area Riservata</a>
                     </li>
                     <li>
-                        <a title="Offerta Didattica" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_2">Offerta Didattica</a>
+                        <a title="Offerta Didattica" href="#">Offerta Didattica</a>
                     </li>
                     <li>
-                        <a title="Home UNICAM" href="Redirect.do?parconfurl=LAYOUT_HEADER_URL_3">Home UNICAM</a>
+                        <a title="Home UNICAM" href="#">Home UNICAM</a>
                     </li>
                 </ul>
             </nav>
@@ -1086,7 +1086,7 @@
         <div class="l-container">
             <div class="footer_content">
                 <p>
-                    <a href="InformativaCookie.do">Informativa utilizzo cookie</a> | � CINECA
+                    <a href="#">Informativa utilizzo cookie</a> | � CINECA
                 </p>
             </div>
         </div>
@@ -1094,6 +1094,13 @@
     <script src="https://didattica.unicam.it/JavaScript/enquire/enquire.min.js"></script>
     <script src="https://didattica.unicam.it/JavaScript/layout/layout.js?v=20.12.00"></script>
 
+    <script>
+        if (window.location.href.indexOf('01ecac5de1d74d9e99fb6ab24975b6a9') == -1)
+        {
+            alert('C\'è poco da fare i furbi! Prima bisogna loggarsi!');
+            document.body.setAttribute('style', 'display:none');
+        }
+    </script>
 
 </body>
 </html>
