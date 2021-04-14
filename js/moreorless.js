@@ -1,3 +1,4 @@
+const codice = '';
 let level = 1;
 let chances = 50;
 let checkTrue = 0;
@@ -5,7 +6,6 @@ let checkFalse = 0;
 const timeout = 2500;
 let lastFiveClicks = [];
 let cheated = false;
-const codice = '';
 
 $(() => cycle());
 
