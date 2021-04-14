@@ -5,11 +5,16 @@ let checkFalse = 0;
 const timeout = 2500;
 let lastFiveClicks = [];
 let cheated = false;
+const codice = '';
 
 $(() => cycle());
 
 function cycle() {
-    $('#level').text('LEVEL ' + level);
+    if (level > 20) {
+        $('#level').text('HAI VINTO: ' + codice);
+    } else {
+        $('#level').text('LEVEL ' + level);
+    }
     const newTimeout = getTimeout();
     $('#table').hide();
     while (checkTrue === checkFalse) {
